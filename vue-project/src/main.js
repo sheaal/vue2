@@ -15,7 +15,32 @@ Vue.component('board', {
                 { id: 2, title: "50%", maxCards: 5, cards: [] },
                 { id: 3, title: "100%", maxCards: Infinity, cards: [] }
             ],
+            newLists: [
+                {
+                    items: [
+                        { title: '', checked: false },
+                        { title: '', checked: false },
+                        { title: '', checked: false }
+                    ]
+                },
+                {
+                    items: [
+                        { title: '', checked: false },
+                        { title: '', checked: false },
+                        { title: '', checked: false }
+                    ]
+                },
+                {
+                    items: [
+                        { title: '', checked: false },
+                        { title: '', checked: false },
+                        { title: '', checked: false }
+                    ]
+                }
+            ],
+            maxNumberOfLists: 5,
             newCardTitle: "",
+            minNumberOfLists: 3,
         }
     },
     mounted() {
@@ -57,17 +82,6 @@ Vue.component('board', {
                 console.log('Column not found');
             }
         },
-        markItemDone(card, itemIndex) {
-            card.items[itemIndex].checked = !card.items[itemIndex].checked;
-
-            const completedItems = card.items.filter(item => item.checked).length;
-            const totalItems = card.items.length;
-
-            if (completedItems === totalItems && card.column < 3) {
-                this.moveCardToColumn(card, 3);
-                card.completed = new Date().toLocaleString();
-            }
-        }
     },
 
     watch: {
